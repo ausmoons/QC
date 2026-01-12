@@ -1,0 +1,36 @@
+{
+	"name": "Bronze Qiskit & IQM Quantum Computing",
+	"image": "mcr.microsoft.com/devcontainers/python:3.12",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-toolsai.jupyter"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python"
+			}
+		}
+	},
+
+	"postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt && git config core.autocrlf input",
+
+	"postStartCommand": "bash .devcontainer/start-jupyter.sh",
+
+	"forwardPorts": [8888],
+
+	"portsAttributes": {
+		"8888": {
+			"label": "Jupyter Lab",
+			"onAutoForward": "notify"
+		}
+	},
+
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
+
+	"remoteUser": "vscode"
+}
