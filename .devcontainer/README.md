@@ -1,36 +1,96 @@
-# IQM Quantum Computing
+# Dev Container Setup for Quantum Computing Projects
 
-This folder contains examples for running quantum circuits on IQM's real quantum hardware using IQM Resonance.
+This dev container provides a complete environment for running both Bronze-Qiskit and IQM quantum computing projects.
 
-## Quick Start
+## What's Included
 
-### Using Docker (Recommended)
+- **Python 3.12** (compatible with both Bronze-Qiskit and IQM)
+- **Jupyter Lab** (auto-starts on port 8888)
+- **All dependencies**:
+  - qiskit[visualization]>=1.0
+  - qiskit-aer==0.14.0.1
+  - iqm-client[qiskit]>=33.0.2
+  - matplotlib
+  - jupyterlab
 
-The dev container automatically sets up everything you need:
+## Prerequisites
 
-1. **Start Docker Desktop**
-2. **Open in VS Code** and select "Reopen in Container"
-3. **Open** `qiskit_sample_notebook.ipynb`
-4. **Run the cells** - you'll be prompted to enter your IQM Resonance API token
-5. **Done!** Your circuit will run on IQM Garnet quantum computer
+1. **Docker Desktop** - Download from [docker.com](https://www.docker.com/products/docker-desktop/)
+2. **VS Code** - Download from [code.visualstudio.com](https://code.visualstudio.com/)
+3. **Dev Containers Extension** - Install from VS Code Extensions marketplace
 
-### Getting Your API Token
+## How to Use
 
-1. Go to [IQM Resonance](https://resonance.meetiqm.com/)
-2. Log in to your account
-3. Open the account drawer
-4. Copy your API token
-5. Paste it when prompted in the notebook
+### First Time Setup
 
-## Requirements
+1. Make sure Docker Desktop is running
+2. Open this folder in VS Code
+3. When prompted, click **"Reopen in Container"**
+   - Or press `F1` and select `Dev Containers: Reopen in Container`
+4. Wait for the container to build (first time takes 3-5 minutes)
 
-Already installed via Docker:
-- Python 3.12
-- iqm-client[qiskit]>=33.0.2
-- qiskit[visualization]
-- matplotlib
+### What Happens Automatically
 
-## Supported Quantum Computers
+1. ✅ Python 3.12 environment is created
+2. ✅ All packages are installed
+3. ✅ Jupyter Lab starts automatically on http://localhost:8888
+4. ✅ Port 8888 is forwarded to your local machine
 
-- **IQM Garnet** - Default in the example
-- Check [IQM Resonance](https://resonance.meetiqm.com/) for available devices
+### Working with Notebooks
+
+**Option 1: VS Code Jupyter Extension (Recommended)**
+- Just open any `.ipynb` file
+- VS Code will automatically connect to the Python kernel
+- Run cells directly in VS Code
+
+**Option 2: Jupyter Lab Web Interface**
+- Access at http://localhost:8888
+- No token required (disabled for convenience)
+- Full Jupyter Lab interface
+
+### Checking Jupyter Lab Status
+
+```bash
+# View Jupyter Lab logs
+cat /tmp/jupyter.log
+
+# Check if Jupyter is running
+ps aux | grep jupyter
+```
+
+### Stopping/Restarting Jupyter Lab
+
+```bash
+# Stop Jupyter Lab
+pkill jupyter
+
+# Restart Jupyter Lab
+bash .devcontainer/start-jupyter.sh
+```
+
+## Project Structure
+
+```
+bronze-qiskit/
+├── .devcontainer/
+│   ├── devcontainer.json       # Dev container configuration
+│   ├── start-jupyter.sh        # Jupyter auto-start script
+│   └── README.md              # This file
+├── quantum-with-qiskit/       # Bronze-Qiskit tutorials (100+ notebooks)
+├── IQM/                       # IQM Resonance notebook
+├── requirements.txt           # Original Bronze-Qiskit requirements
+└── requirements-complete.txt  # Combined requirements for both projects
+```
+
+## Troubleshooting
+
+### Jupyter Lab not accessible?
+- Check Docker Desktop is running
+- Verify port 8888 is forwarded: VS Code → PORTS tab
+- Check logs: `cat /tmp/jupyter.log`
+
+### Package installation failed?
+- Rebuild container: `F1` → `Dev Containers: Rebuild Container`
+
+### Python version issues?
+- Verify Python version: `python --version` (should be 3.12.x)
