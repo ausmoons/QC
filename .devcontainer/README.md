@@ -7,11 +7,13 @@ This dev container provides a complete environment for running both Bronze-Qiski
 - **Python 3.12** (compatible with both Bronze-Qiskit and IQM)
 - **Jupyter Lab** (auto-starts on port 8888)
 - **All dependencies**:
-  - qiskit[visualization]>=1.0
-  - qiskit-aer==0.14.0.1
+  - qiskit[visualization]>=1.0,<1.3
+  - qiskit-aer>=0.15.0,<0.18
+  - qiskit-ibm-runtime
   - iqm-client[qiskit]>=33.0.2
   - matplotlib
   - jupyterlab
+  - ipywidgets
 
 ## Prerequisites
 
@@ -71,15 +73,15 @@ bash .devcontainer/start-jupyter.sh
 ## Project Structure
 
 ```
-bronze-qiskit/
+QC/
 ├── .devcontainer/
 │   ├── devcontainer.json       # Dev container configuration
 │   ├── start-jupyter.sh        # Jupyter auto-start script
 │   └── README.md              # This file
-├── quantum-with-qiskit/       # Bronze-Qiskit tutorials (100+ notebooks)
-├── IQM/                       # IQM Resonance notebook
-├── requirements.txt           # Original Bronze-Qiskit requirements
-└── requirements-complete.txt  # Combined requirements for both projects
+├── IBM/                       # IBM quantum computing notebooks
+├── IQM/                       # IQM Resonance notebooks
+├── Mixed/                     # Mixed quantum computing resources
+└── requirements.txt           # Python dependencies
 ```
 
 ## Troubleshooting
